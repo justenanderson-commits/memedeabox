@@ -29,11 +29,17 @@ class App extends Component {
     }
   }
 
+  // addMeme is a function that will update the state of this component. It'll first have to spread the existing state, then add the new Meme, wrap it up in a new array, then set the state. That function will then have to be passed down to the Form.
+
+  addMeme = (newMeme) => {
+    this.setState({ memes: [...this.state.memes, newMeme]})
+  }
+
   render() {
     return(
       <div className="app">
         <h1>MemedeaBox</h1>
-        <Form />
+        <Form addMeme={ this.addMeme } />
         <AllMemes memes={ this.state.memes }/>
       </div>
     )

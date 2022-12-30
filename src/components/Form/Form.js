@@ -10,6 +10,27 @@ class Form extends Component {
     }
   }
 
+  handleChange = (event) => {
+    this.setState = ({ [event.target.name]: event.target.value})
+  }
+
+  submitMeme = (event) => {
+    event.preventDefault()
+    const newMeme = {
+      ...this.state,
+      id: Date.now()
+    }
+    this.props.addMeme(newMeme)
+    this.clearInputs()
+  }
+
+  clearInputs = () => {
+    this.setState = {
+      title: '',
+      url: ''
+    }
+  }
+
   render() {
     return(
       <form>
@@ -18,6 +39,7 @@ class Form extends Component {
           name="title"
           placeholder="Add an interesting title"
           value={ this.state.title }
+          onChange={ (event) => this.handleChange(event)}
         />
 
         <input  
@@ -25,9 +47,11 @@ class Form extends Component {
           name="url"
           placeholder="What's the meme's address?"
           value={ this.state.url }
+          onChange={ (event) => this.handleChange(event)}
           />
 
-        <button>Save to my collection</button>
+        <button onClick={ (event) => this.submitMeme(event) }>Save to my collection</button>
+
       </form>
     )
   }
