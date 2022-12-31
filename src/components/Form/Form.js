@@ -18,7 +18,7 @@ class Form extends Component {
     event.preventDefault()
     const newMeme = {
       title: this.state.title,
-      description: this.state.description,
+      url: this.state.url,
       id: Date.now()
     }
     this.props.addMeme(newMeme)
