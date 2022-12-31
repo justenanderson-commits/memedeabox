@@ -1,11 +1,11 @@
 import './SingleMeme.css'
 
-const SingleMeme = ({ title, url, id }) => {
+const SingleMeme = ({ title, url, id, deleteMeme }) => {
   return ( 
     <div className="single-meme" key={ id } id={ id }>
       <p>{ title }</p>
       <img src={ url } />
-      <button>Delete</button>
+      <button onClick={ () => deleteMeme(id)}>Delete</button>
     </div>
    )
 }

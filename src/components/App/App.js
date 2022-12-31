@@ -2,37 +2,31 @@ import React, { Component } from 'react'
 import AllMemes from '../AllMemes/AllMemes';
 import './App.css';
 import Form from '../Form/Form'
-
+import fetchAllMemes from '../../apiCalls/fetch';
 
 class App extends Component {
   constructor() {
     super()
-    this.state = {
-      memes: [
-        { 
-          title: "I have been waiting for this!",
-          url: "https://i.redd.it/8jihe14tb19a1.jpg",
-          id: 1
-        },
-        { 
-          title: "And I'm saying this as a Gen Z kid",
-          url: "https://i.redd.it/561lxn7pj29a1.gif",
-          id: 2
-        },
-        { 
-          title: "Can't beat me",
-          url: "https://i.redd.it/afwvkxccg09a1.gif",
-          id: 3
-        },
-      ],
-      error: null
+    this.state = { 
+      memes: []
     }
   }
 
-  // addMeme is a function that will update the state of this component. It'll first have to spread the existing state, then add the new Meme, wrap it up in a new array, then set the state. That function will then have to be passed down to the Form.
+  componentDidMount = () => {
+    fetchAllMemes()
+      .then(data => {
+        this.setState({ memes: data })
+      })
+  }
 
   addMeme = (newMeme) => {
     this.setState({ memes: [...this.state.memes, newMeme]})
+  }
+
+  deleteMeme = (id) => {
+    console.log('This works. ID is: ', id)
+    const filteredMemes = this.state.memes.filter(meme => meme.id != id)
+    this.setState({ memes: filteredMemes})
   }
 
   render() {
@@ -40,7 +34,7 @@ class App extends Component {
       <div className="app">
         <h1>MemedeaBox</h1>
         <Form addMeme={ this.addMeme } />
-        <AllMemes memes={ this.state.memes }/>
+        <AllMemes memes={ this.state.memes } deleteMeme = { this.deleteMeme }/>
       </div>
     )
   }
