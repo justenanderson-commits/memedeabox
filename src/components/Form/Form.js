@@ -51,7 +51,7 @@ class Form extends Component {
           onChange={ (event) => this.handleChange(event)}
           />
 
-        <button onClick={ (event) => this.submitMeme(event) }>Save to my collection</button>
+        <button name="save-button" onClick={ (event) => this.submitMeme(event) }>Save to my collection</button>
 
       </form>
     )

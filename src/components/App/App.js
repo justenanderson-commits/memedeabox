@@ -17,6 +17,11 @@ class App extends Component {
       .then(data => {
         this.setState({ memes: data })
       })
+      .catch(error => {
+        console.log('Error message: ', error.message)
+        this.setState({ [error]: error.message })
+        console.log('state: ', this.state)
+      })
   }
 
   addMeme = (newMeme) => {
@@ -35,6 +40,7 @@ class App extends Component {
       <div className="app">
         <h1>MemedeaBox</h1>
         <Form addMeme={ this.addMeme } />
+        { !this.state.memes.length && <h2>Network error</h2> }
         <AllMemes memes={ this.state.memes } deleteMeme = { this.deleteMeme }/>
       </div>
     )
