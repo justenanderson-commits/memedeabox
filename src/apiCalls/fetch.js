@@ -8,4 +8,20 @@ const fetchAllMemes = () => {
     })
 }
 
-export default fetchAllMemes
+const postMeme = (newMeme) => {
+  return fetch('http://localhost:3001/api/v1/memes', {
+    method: 'POST',
+    body: JSON.stringify(newMeme),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => { 
+    return response.json })
+  .catch(error => {
+    console.log("Couldn't post: ", error.message)
+    return error
+  })
+}
+
+export { fetchAllMemes, postMeme }

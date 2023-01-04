@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AllMemes from '../AllMemes/AllMemes';
 import './App.css';
 import Form from '../Form/Form'
-import fetchAllMemes from '../../apiCalls/fetch';
+import { fetchAllMemes, postMeme } from '../../apiCalls/fetch';
 
 class App extends Component {
   constructor() {
@@ -20,12 +20,13 @@ class App extends Component {
   }
 
   addMeme = (newMeme) => {
+    postMeme(newMeme)
     this.setState({ memes: [...this.state.memes, newMeme]})
   }
 
   deleteMeme = (id) => {
     console.log('This works. ID is: ', id)
-    const filteredMemes = this.state.memes.filter(meme => meme.id != id)
+    const filteredMemes = this.state.memes.filter(meme => meme.id !== id)
     this.setState({ memes: filteredMemes})
   }
 
